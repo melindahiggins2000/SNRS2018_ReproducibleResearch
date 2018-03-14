@@ -1,0 +1,25 @@
+---
+title: "Module 02: Workshop materials, RStudio Interface, Getting Started with R"
+author: "[Melinda K. Higgins, PhD.](https://melindahiggins.netlify.com/)"
+date: 'March 21, 2018: 12:30pm – 3:30pm, EST<br><br><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="by-nc-sa-4.0-88x31.png" style="border-width:0" src="images/by-nc-sa-4.0-88x31.png" /></a>'
+output: 
+  ioslides_presentation:
+    incremental: true
+    css: ioslides.css
+    widescreen: yes
+    self_contained: no
+    includes:
+      in_header: header.html
+subtitle: "Let's get started!"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Module 02
+
+* Introduction to the RStudio Integrated Development Environment (IDE)
+* Workshop Materials (hosted on Github)
+* Getting started with R code
+

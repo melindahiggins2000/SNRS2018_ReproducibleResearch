@@ -1,0 +1,96 @@
+---
+title: "Module 1 - Lesson 05"
+author: "[Melinda K. Higgins, PhD.](https://melindahiggins.netlify.com/)"
+date: '`r Sys.Date()`<br><br><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="by-nc-sa-4.0-88x31.png" style="border-width:0" src="images/by-nc-sa-4.0-88x31.png" /></a>'
+output: 
+  ioslides_presentation:
+    incremental: false
+    css: ioslides.css
+    widescreen: yes
+    self_contained: no
+    includes:
+      in_header: header.html
+subtitle: Getting Started – R and RStudio
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Lesson 05 ... {.flexbox .vcenter}
+
+<div style="font-size:200%">
+Getting Started with
+</div>
+
+<p>  </p>
+
+<img src="images/Rlogo.png" alt="R logo" style="width:160px;height:140px;"> 
+
+&
+
+<img src="images/RStudio-Logo-Blue-Gradient.png" alt="RStudio logo" style="width:400px;height:140px;">
+
+## <img src="images/Rlogo.PNG" width="100" />
+
+* [https://www.r-project.org/](https://www.r-project.org/)
+* [https://cran.r-project.org/](https://cran.r-project.org/)
+
+R is a language and environment for statistical computing and graphics. It is a GNU project which is similar to the S language and environment which was developed at Bell Laboratories (formerly AT&T, now Lucent Technologies) by John Chambers and colleagues. R can be considered as a different implementation of S. There are some important differences, but much code written for S runs unaltered under R.
+
+R is available as Free Software under the terms of the Free Software Foundation’s GNU General Public License in source code form. It compiles and runs on a wide variety of UNIX platforms and similar systems (including FreeBSD and Linux), Windows and MacOS.
+
+## STEP 1: Download and Install R
+
+1. Download R for your operating system: Windows, Mac OS X or Linux [https://cran.r-project.org/](https://cran.r-project.org/) - specific information and installation instructions are provided for each operating system.
+
+2. Once installed, run R and make sure it is working. For example try a few commands, such as `2+2` or computing the mean of an array of numbers `mean(c(1,2,3,4,5))`.
+
+```
+> 2 + 2
+> 2+2
+[1] 4
+> mean(c(1,2,3,4,5))
+[1] 3
+```
+## <img src="images/RStudio-Logo-Blue-Gradient.png" width="200" /> 
+
+* [https://www.rstudio.com/products/rstudio/](https://www.rstudio.com/products/rstudio/)
+
+RStudio is an integrated development environment (IDE) for R. It includes a console, syntax-highlighting editor that supports direct code execution, as well as tools for plotting, history, debugging and workspace management.
+
+RStudio is available in open source and commercial editions and runs on the desktop (Windows, Mac, and Linux) or in a browser connected to RStudio Server or RStudio Server Pro (Debian/Ubuntu, RedHat/CentOS, and SUSE Linux).
+
+## STEP 2: Download and Install RStudio
+
+1. Download RStudio Desktop (open source license - FREE) from [https://www.rstudio.com/products/rstudio/download/](https://www.rstudio.com/products/rstudio/download/) - (scroll down) choose the "Installer" for your operating system (Windows/Vista; Mac OS X; Linux Ubuntu Debian, Fedora/Redhat/openSUSE).
+
+2. Once installed, run RStudio and check to make sure it is linked to your R installation (which is why you install R first).
+
+3. Let's explore the RStudio interface; basic layout; menus and options
+
+## Resources for Learning More About R
+
+* RStudio
+    - Webinars [https://www.rstudio.com/resources/webinars/](https://www.rstudio.com/resources/webinars/)
+    - Online Learning [https://www.rstudio.com/online-learning/](https://www.rstudio.com/online-learning/)
+    - External training [https://www.rstudio.com/instructors/](https://www.rstudio.com/instructors/)
+* TryR - CodeSchool [http://tryr.codeschool.com/](http://tryr.codeschool.com/)
+* SwiRl [http://swirlstats.com/](http://swirlstats.com/)
+* R-bloggers - Learn R [https://www.r-bloggers.com/how-to-learn-r-2/](https://www.r-bloggers.com/how-to-learn-r-2/)
+
+## Next in Lesson 06 ... {.flexbox .vcenter}
+
+<div style="font-size:200%">
+Getting Started with
+</div>
+
+<p>  </p>
+
+<img src="images/Git-Logo-2Color.png" alt="Git logo" style="width:228px;height:95px;">
+
+&
+
+<img src="images/Octocat.png" alt="Octocat Github logo" style="width:200px;height:166px;">
+
+**Github**

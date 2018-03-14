@@ -1,0 +1,60 @@
+---
+title: "Module 1 - Lesson 07"
+author: "[Melinda K. Higgins, PhD.](https://melindahiggins.netlify.com/)"
+date: '`r Sys.Date()`<br><br><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="by-nc-sa-4.0-88x31.png" style="border-width:0" src="images/by-nc-sa-4.0-88x31.png" /></a>'
+output: 
+  ioslides_presentation:
+    incremental: false
+    css: ioslides.css
+    widescreen: yes
+    self_contained: no
+    includes:
+      in_header: header.html
+subtitle: Create your first document!
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## STEPS for creating your first document
+
+1. Make sure that R, RStudio, and Git are installed
+2. Create a new Github repository "MyFirstDocument" with a Readme page - Click "Clone or Download" and In the "Clone with HTTPS" click to copy the URL to the clipboard
+3. Open RStudio - create a New Project with Version Control - paste in the URL for the Github repository you just created. Choose a good location on your local system to save your project (e.g. "C:\MyGithub\MyFirstDocument").
+4. In RStudio, create a new `rmarkdown` file - /File/New File/R Markdown/ - choose Document - HTML format put in a title and your name - click OK.
+5. For now, you don't need to change anything. Click down arrow next to "Knit" and choose "Knit to HTML". The first time you try this, RStudio may ask you to install `rmarkdown` or `knitr` or other necessary packages.
+6. If that works, also try "Knit to Word" to try creating a DOC formatted document. 
+7. [OPTIONAL] If you have LaTeX installed, you can also try "Knit to PDF".
+
+## Backup and Sync up with Github
+
+* Click on the "Git" tab and you'll see the new files you just created.
+* We can "push" these files up to Github and track the changes and version using Git
+* We could do this using the RStudio interface, but we're going to use the Git Bash window instead to:
+    a. change directory to your new Github repository with your new RStudio project
+    b. **Add** (**Stage**) the files you want to back up in the Github repository
+    c. **Commit** the files you want to back up ("snapshot of your files") - add a descriptive comment about your changes and updates
+    d. **PUSH** the files to Github
+    e. check `git status`
+    
+## Git Bash
+    
+| STEP | **Git Bash Command** | Explanation
+|:-----|:---------------------|:-------------------------|
+| 1 | `$ cd /c/RepTemplates/MyFirstDocument` | change directory to your project folder |
+| 2 | `$ git add .` | stage all files to be added to the Github repository |
+| 3 | `$ git commit -m "files for My First Document"` | commit the files, add a description of these changes |
+| 4 | `$ git push` | PUSH the files UP to your Github account |
+| 5 | `$ git status` | check the status of the sync |
+
+## [OPTIONAL] Install LaTeX - to create PDF documents
+
+If you want to create PDF (portable document format) files, you will also need to install LaTeX. Download and install from [https://www.latex-project.org/get/](https://www.latex-project.org/get/):
+
+* Linux [http://www.tug.org/texlive/](http://www.tug.org/texlive/)
+* Mac OS X - MacTex [http://www.tug.org/mactex/](http://www.tug.org/mactex/)
+* Windows - MiKTeX [https://miktex.org/](https://miktex.org/)
+
+**NOTE** I recommend installing the full version with all associated packages so you're not constantly updating and installing packages on the fly. However, doing the full install will take awhile not only to download everything but also to get everything installed.
+
