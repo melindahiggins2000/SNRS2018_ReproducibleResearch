@@ -1,0 +1,129 @@
+---
+title: "Weather Information Preferences in the United States"
+subtitle: "Summary Report For the `r params$region` Region"
+author: "Author: Melinda K. Higgins, PhD."
+date: "`r format(Sys.Date(), '%A, %B %d, %Y')`"
+output: html_document
+params:
+  region: 
+    label: "Region:"
+    value: Mountain
+    input: select
+    choices: ["East North Central",
+    "East South Central", "Middle Atlantic",
+    "Mountain", "New England", "Pacific",
+    "South Atlantic", "West North Central",
+    "West South Central"]
+
+---
+
+```{r setup, include=FALSE}
+# define knitr options
+knitr::opts_chunk$set(echo = FALSE)
+knitr::opts_chunk$set(warning = FALSE)
+knitr::opts_chunk$set(message = FALSE)
+
+# set any missing NAs in tables to blank
+options(knitr.kable.NA='')
+
+# load R packages
+library(fivethirtyeight)
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+library(ggthemes)
+
+# load steak_survey dataset
+data("weather_check", package="fivethirtyeight")
+
+# create subset, no missing NAs
+# pick a specific region
+sdat <- weather_check %>%
+  filter(region=="Mountain")
+
+```
+
+## Background
+
+In April 2015, Walt Hickey at [538.com](http://fivethirtyeight.com/) published an article entitled ["Where People Go To Check The Weather"](https://fivethirtyeight.com/features/weather-forecast-news-app-habits/). This article utilized survey data collected from 928 people which asked questions on if they typically check the weather on a daily basis and if so, what source they used to check the weather. Additional follow-up questions were asked about which specific websites or apps they used and if they had a smartwatch if they would check the weather on that smartwatch. 
+
+## Purpose
+
+The "weather check" dataset that was used for the ["Where People Go To Check The Weather"](https://fivethirtyeight.com/features/weather-forecast-news-app-habits/) article, is available through the R package [`fivethirtyeight`](https://cran.r-project.org/web/packages/fivethirtyeight/index.html). Using this dataset, this article summarizes the weather source preferences for the `r params$region` Region of the United States by gender. 
+For our summary presented here, a subset of the original weather check dataset was extracted to only include responses with no missing data and only included respondents from the `r params$region` region of the US. The data subset used for our summary had `r nrow(sdat)` respondents.
+
+## Demographics of Survey Respondents in a Merged Table
+
+This section provides demographic summary tables for the `r nrow(sdat)` survey respondents.
+
+```{r}
+# create table summary for ages
+tb1 <- sdat %>% 
+  select(age) %>%
+  table() %>%
+  prop.table()*100
+
+# create table summary for gender
+tb2 <- sdat %>% 
+  select(female) %>%
+  table() %>%
+  prop.table()*100
+
+# create table summary for income
+tb3 <- sdat %>% 
+  select(hhold_income) %>%
+  table() %>%
+  prop.table()*100
+
+# convert all tables to data frames
+tb1df <- as.data.frame(tb1) 
+tb2df <- as.data.frame(tb2)
+tb3df <- as.data.frame(tb3)
+
+# merge 1st 2 data frames together
+mtb <- merge(data.frame(tb1df, row.names = NULL),
+             data.frame(tb2df, row.names = NULL),
+             by=0, all=TRUE)[-1]
+
+# merge result with 3rd data frame
+mtb2 <- merge(data.frame(mtb, row.names = NULL),
+              data.frame(tb3df, row.names = NULL),
+              by=0, all=TRUE)[-1]
+
+# use the final data frame
+# make into a table with kable
+# add styling with kableExtra
+# add header with labels spanning 2 columns each
+mtb2 %>%
+  knitr::kable(format="html",
+    col.names=c("Category","%",
+                "Category","%",
+                "Category","%"),
+    digits=2,
+    caption="Demographics of Survey Respondents") %>%
+  kableExtra::kable_styling(c("striped","bordered"),
+                full_width=FALSE) %>%
+  add_header_above(c("Ages"=2,"Gender"=2,"Income"=2))
+```
+
+## Weather Source Preference by Gender
+
+Finally, here is a breakdown of the `r nrow(sdat)` survey respondents for the `r params$region` region of the US on how they check their daily weather by gender.
+
+```{r}
+library(stringr)
+ggplot(sdat, 
+       aes(x = weather_source, fill = female)) + 
+  geom_bar(position="dodge",colour="black") +
+  scale_x_discrete(labels = function(x) str_wrap(x, width = 20)) +
+  ggtitle(paste0("Weather Source by Gender: ",
+                 params$region," Region")) +
+  xlab("Weather Source Preference") +
+  ylab("Number of Respondents") +
+  scale_fill_manual(values=c("skyblue","palevioletred"),
+    name="Gender",
+    breaks=c(FALSE,TRUE),
+    labels=c("Male", "Female")) +
+  coord_flip() +
+  theme_fivethirtyeight()
+```
