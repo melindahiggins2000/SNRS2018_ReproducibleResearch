@@ -5,7 +5,7 @@ author: "Author: Melinda K. Higgins, PhD."
 date: "`r format(Sys.Date(), '%A, %B %d, %Y')`"
 output: html_document
 params:
-  region: "Pacific"
+  region: "New England"
 ---
 
 ```{r setup, include=FALSE}

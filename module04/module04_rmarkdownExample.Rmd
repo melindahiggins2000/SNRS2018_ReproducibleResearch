@@ -3,8 +3,8 @@ title: "R Markdown Document 1"
 author: "Melinda K. Higgins, PhD."
 date: "March 21, 2018"
 output:
-  word_document: default
   html_document: default
+  word_document: default
   pdf_document: default
 ---
 
@@ -106,7 +106,7 @@ plot(pressure)
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
 
-```{r pressure2, echo=TRUE, fig.height=4, fig.width=4}
+```{r pressure2, echo=TRUE, fig.height=5, fig.width=5}
 plot(pressure)
 ```
 
@@ -121,17 +121,7 @@ knitr::kable(head(cars),
 
 $$ Y = \beta_0 + \beta_1x $$
 
-## Insert Images
 
-Here is an image inserted
-
-![sunstar](sunstar.png)
-
-## Insert an Animated GIF and Video
-
-![sunstar](sunstar/sunstar.gif)
-
-![sunstar](sunstar/sunstar.mp4)
 
 ## Insert test with some footnotes
 
