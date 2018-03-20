@@ -6,7 +6,7 @@ Link to [2018 SNRS Conference Workshop Details Summary](https://netforumpro.com/
 
 ## Download or Fork This Repository
 
-* If you do NOT currently have a Github account, click the GREEN "Clond or Download" button above. Choose "Download ZIP" to save a copy of everything in this repository to your own computer.
+* If you do NOT currently have a Github account, click the GREEN "Clone or Download" button above. Choose "Download ZIP" to save a copy of everything in this repository to your own computer.
 * If you DO have a Github account, you are welcome to FORK a copy of this repository to your own Github account (click FORK at TOP RIGHT of this page).
 
 ## Content Available in PDFs
