@@ -4,6 +4,11 @@ Repository for 2018 SNRS - Pre Conference Workshop 7 "Reproducible Research Pipe
 
 Link to 2018 SNRS Conference Workshop Details Summary [https://netforumpro.com/eweb/DynamicPage.aspx?WebCode=SessionDetail&session_key=4a39439e-ee5c-4be1-a28c-c5f06ff1b4a5&evt_key=a0086b67-076b-4fb8-86db-8e6a22d21b13&Site=SNRS](https://netforumpro.com/eweb/DynamicPage.aspx?WebCode=SessionDetail&session_key=4a39439e-ee5c-4be1-a28c-c5f06ff1b4a5&evt_key=a0086b67-076b-4fb8-86db-8e6a22d21b13&Site=SNRS)
 
+## Download or Fork This Repository
+
+* If you do NOT currently have a Github account, click the GREEN "Clond or Download" button above. Choose "Download ZIP" to save a copy of everything in this repository to your own computer.
+* If you DO have a Github account, you are welcome to FORK a copy of this repository to your own Github account (click FORK at TOP RIGHT of this page).
+
 ## Files for Workshop
 
 * module_01
