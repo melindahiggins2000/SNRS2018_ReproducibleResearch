@@ -1,9 +1,11 @@
 ---
 title: "Steak Preferences in the United States"
-subtitle: "Summary Report For the _**Mountain**_ Region"
-author: "Author: Melinda K. Higgins, PhD."
+author: 'Author: Melinda K. Higgins, PhD.'
 date: "March 21, 2018"
-output: html_document
+output:
+  html_document: default
+  word_document: default
+subtitle: Summary Report For the _**Mountain**_ Region
 ---
 
 ```{r setup, include=FALSE}
