@@ -4,7 +4,6 @@
   <title>Reproducible Research Pipelines Using R and RStudio</title>
 
   <meta charset="utf-8">
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <meta http-equiv="X-UA-Compatible" content="chrome=1">
   <meta name="generator" content="pandoc" />
 
@@ -51,17 +50,17 @@
     font-size: 0.5em;
   }
   </style>
-  
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script>
   $(document).ready(function() {
     $('slide:not(.backdrop):not(.title-slide)').append('<div class=\"footnotes\">');
-  
+
     $('footnote').each(function(index) {
       var text  = $(this).html();
       var fnNum = (index+1).toString();
       $(this).html(fnNum.sup());
-  
+
       var footnote   = fnNum + '. ' + text + '<br/>';
       var oldContent = $(this).parents('slide').children('div.footnotes').html();
       var newContent = oldContent + footnote;
@@ -69,6 +68,7 @@
     });
   });
   </script>
+  <script src="module_01_files/header-attrs-2.14/header-attrs.js"></script>
   <link href="module_01_files/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
   <link href="module_01_files/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
   <link href="module_01_files/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
@@ -94,6 +94,10 @@
       display: list-item;
     }
 
+    details > summary > p:only-child {
+      display: inline;
+    }
+
     slides > slide {
       -webkit-transition: all 0.4s ease-in-out;
       -moz-transition: all 0.4s ease-in-out;
@@ -109,7 +113,18 @@
       transition: opacity 0.6s ease-in 0.4s;
       opacity: 0;
     }
+/* https://github.com/ropensci/plotly/pull/524#issuecomment-468142578 */
+slide:not(.current) .plotly.html-widget{
+  display: block;
+}
 
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            
   </style>
 
   <link rel="stylesheet" href="ioslides.css" type="text/css" />
@@ -142,7 +157,7 @@
 <li>Module 06: Customizing R Markdown (templates, parameters and automation)</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Module 01</h2></hgroup><article  class="flexbox vcenter" id="module-01">
+</article></slide><slide class=""><hgroup><h2>Module 01</h2></hgroup><article  id="module-01" class="flexbox vcenter">
 
 <div class="centered">
 <p style="font-size:48px">
@@ -154,8 +169,8 @@
 </article></slide><slide class=""><hgroup><h2>Timeline Reproducible Research &amp; Transparency<footnote>Timeline partially based on PLOS Blog December 2016<a href='http://blogs.plos.org/absolutely-maybe/2016/12/05/reproducibility-crisis-timeline-milestones-in-tackling-research-reliability/' title=''>http://blogs.plos.org/absolutely-maybe/2016/12/05/reproducibility-crisis-timeline-milestones-in-tackling-research-reliability/</a></footnote></h2></hgroup><article  id="timeline-reproducible-research-transparencytimeline-partially-based-on-plos-blog-december-2016httpblogs.plos.orgabsolutely-maybe20161205reproducibility-crisis-timeline-milestones-in-tackling-research-reliability">
 
 <table class = 'rmdtable'>
-<col width="11.363637%" />
-<col width="88.636360%" />
+<col width="11.363636%" />
+<col width="88.636364%" />
 <tr class="header">
 <th align="left">YEAR</th>
 <th align="left">Event</th>
@@ -181,8 +196,8 @@
 </article></slide><slide class=""><hgroup><h2>Timeline Reproducible Research &amp; Transparency</h2></hgroup><article  id="timeline-reproducible-research-transparency">
 
 <table class = 'rmdtable'>
-<col width="11.363637%" />
-<col width="88.636360%" />
+<col width="11.363636%" />
+<col width="88.636364%" />
 <tr class="header">
 <th align="left">YEAR</th>
 <th align="left">Event</th>
@@ -218,7 +233,7 @@
 
 <p>2010 Video Presentation by Keith A. Baggerly <a href='http://videolectures.net/cancerbioinformatics2010_baggerly_irrh/' title=''>http://videolectures.net/cancerbioinformatics2010_baggerly_irrh/</a></p>
 
-</article></slide><slide class=""><hgroup><h2>The Excel-Error Heard Around the World</h2></hgroup><article  class="columns-2" id="the-excel-error-heard-around-the-world">
+</article></slide><slide class=""><hgroup><h2>The Excel-Error Heard Around the World</h2></hgroup><article  id="the-excel-error-heard-around-the-world" class="columns-2">
 
 <p><img src="images/rogoff.PNG" alt="rogoff" style="width:370px;height:290px;"></p>
 
@@ -234,8 +249,8 @@
 </article></slide><slide class=""><hgroup><h2>Timeline Reproducible Research &amp; Transparency</h2></hgroup><article  id="timeline-reproducible-research-transparency-1">
 
 <table class = 'rmdtable'>
-<col width="11.363637%" />
-<col width="88.636360%" />
+<col width="11.363636%" />
+<col width="88.636364%" />
 <tr class="header">
 <th align="left">YEAR</th>
 <th align="left">Event</th>
@@ -258,7 +273,7 @@
 </tr>
 </table>
 
-</article></slide><slide class=""><hgroup><h2>Wide-Spread Gene Name Errors</h2></hgroup><article  class="centered" id="wide-spread-gene-name-errors">
+</article></slide><slide class=""><hgroup><h2>Wide-Spread Gene Name Errors</h2></hgroup><article  id="wide-spread-gene-name-errors" class="centered">
 
 <p><img src="images/geneerrors.PNG" alt="geneerrors" style="width:643px;height:449px;"></p>
 
@@ -270,18 +285,20 @@
 <li>MS Excel inadvertently converts gene symbols to dates and floating-point numbers</li>
 <li>For example, gene symbols such as SEPT2 (Septin 2) and MARCH1 [Membrane-Associated Ring Finger (C3HC4) 1, E3 Ubiquitin Protein Ligase] are converted by default to &lsquo;2-Sep&rsquo; and &lsquo;1-Mar&rsquo;, respectively.</li>
 <li>RIKEN identifiers were automatically converted to floating point numbers (i.e. from accession &lsquo;2310009E13&rsquo; to &lsquo;2.31E+13&rsquo;).</li>
-<li>And gene symbols were converted to dates in supplementary data of recently published papers (e.g. &lsquo;SEPT2&rsquo; converted to &lsquo;2006/09/02&rsquo;).</li>
+<li>And gene symbols were converted to dates in supplementary data of recently published papers (e.g. &lsquo;SEPT2&rsquo; converted to &lsquo;2006/09/02&rsquo;).</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Wide-Spread Gene Name Errors</h2></hgroup><article  class="centered" id="wide-spread-gene-name-errors-2">
+</article></slide><slide class=""><hgroup><h2>Wide-Spread Gene Name Errors</h2></hgroup><article  id="wide-spread-gene-name-errors-2" class="centered">
 
-<p>&lt;img src=&ldquo;images/economist.PNG&rdquo; alt=&ldquo;economist&rdquo; 398 x 416 style=&ldquo;width:398px;height:416px;&rdquo;&gt; <a href='https://www.economist.com/blogs/graphicdetail/2016/09/daily-chart-3' title=''>https://www.economist.com/blogs/graphicdetail/2016/09/daily-chart-3</a></p>
+<p><img src="images/economist.PNG" alt="economist" style="width:398px;height:416px;"></p>
+
+<p><a href='https://www.economist.com/blogs/graphicdetail/2016/09/daily-chart-3' title=''>https://www.economist.com/blogs/graphicdetail/2016/09/daily-chart-3</a></p>
 
 </article></slide><slide class=""><hgroup><h2>People to Know and Books on Reproducibility</h2></hgroup><article  id="myImagePage">
 
 <table class = 'rmdtable'>
 <col width="26.415094%" />
-<col width="73.584908%" />
+<col width="73.584906%" />
 <tr class="header">
 <th align="center">Image</th>
 <th align="left">Book</th>
@@ -307,7 +324,7 @@ Yihui Xie</span> <a href='https://www.crcpress.com/bookdown-Authoring-Books-and-
 
 <table class = 'rmdtable'>
 <col width="26.415094%" />
-<col width="73.584908%" />
+<col width="73.584906%" />
 <tr class="header">
 <th align="center">Image</th>
 <th align="left">Book</th>
@@ -336,8 +353,8 @@ Chester Ismay and Albert Y. Kim</span>; read online <a href='https://ismayc.gith
 </article></slide><slide class=""><hgroup><h2>Literate Programming &gt; Dynamic Documentation &gt; [R]Markdown</h2></hgroup><article  id="literate-programming-dynamic-documentation-rmarkdown">
 
 <table class = 'rmdtable'>
-<col width="7.352942%" />
-<col width="92.647057%" />
+<col width="7.352941%" />
+<col width="92.647059%" />
 <tr class="header">
 <th align="left">YEAR</th>
 <th align="left">Event</th>
@@ -358,8 +375,8 @@ Friedrich Leisch</span> introduces <code>SWEAVE</code> a program for &ldquo;Dyna
 </article></slide><slide class=""><hgroup><h2>Literate Programming &gt; Dynamic Documentation &gt; [R]Markdown</h2></hgroup><article  id="literate-programming-dynamic-documentation-rmarkdown-1">
 
 <table class = 'rmdtable'>
-<col width="7.352942%" />
-<col width="92.647057%" />
+<col width="7.352941%" />
+<col width="92.647059%" />
 <tr class="header">
 <th align="left">YEAR</th>
 <th align="left">Event</th>
@@ -441,7 +458,7 @@ Pandoc</span> <em>(&ldquo;universal document converter&rdquo;)</em> <footnote><a
 
 <p></span></p>
 
-</article></slide><slide class=""><hgroup><h2>The <strong>RStudio</strong>&ldquo;HUB&rdquo;</h2></hgroup><article  id="the-rstudiohub">
+</article></slide><slide class=""><hgroup><h2>The <strong>RStudio</strong>”HUB”</h2></hgroup><article  id="the-rstudiohub">
 
 <p><img src="images/rmarkdownHome.PNG" width="850" /></p>
 
@@ -581,7 +598,7 @@ speed of collaboration</span></strong> - faster advancement of science, knowledg
 </ul></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Dissemination - Who? <em>(e.g. stakeholders)</em></h2></hgroup><article  id="dissemination---who-e.g.stakeholders">
+</article></slide><slide class=""><hgroup><h2>Dissemination - Who? <em>(e.g. stakeholders)</em></h2></hgroup><article  id="dissemination---who-e.g.-stakeholders">
 
 <ul class = 'build'>
 <li><strong><span style="color:red">
@@ -598,23 +615,23 @@ Yourself</span></strong></li>
 
 </article></slide><slide class=""><hgroup><h2>The Big Picture</h2></hgroup><article  id="bigpic">
 
-<img src='images/TheBigPic01a.PNG' title=''/>
+<img src='images/TheBigPic01a.png' title=''/>
 
 </article></slide><slide class=""><hgroup><h2>The Big Picture</h2></hgroup><article  id="bigpic">
 
-<img src='images/TheBigPic02a.PNG' title=''/>
+<img src='images/TheBigPic02a.png' title=''/>
 
 </article></slide><slide class=""><hgroup><h2>The Big Picture</h2></hgroup><article  id="bigpic">
 
-<img src='images/TheBigPic03a.PNG' title=''/>
+<img src='images/TheBigPic03a.png' title=''/>
 
 </article></slide><slide class=""><hgroup><h2>The Big Picture</h2></hgroup><article  id="bigpic">
 
-<img src='images/TheBigPic04a.PNG' title=''/>
+<img src='images/TheBigPic04a.png' title=''/>
 
 </article></slide><slide class=""><hgroup><h2>The Big Picture</h2></hgroup><article  id="bigpic">
 
-<img src='images/TheBigPic05a.PNG' title=''/></article></slide>
+<img src='images/TheBigPic05a.png' title=''/></article></slide>
 
 
   <slide class="backdrop"></slide>
