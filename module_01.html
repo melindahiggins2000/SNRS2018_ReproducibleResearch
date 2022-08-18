@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Reproducible Research Pipelines Using R and RStudio</title>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+
+  <base target="_blank">
+
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Reproducible Research Pipelines Using R and RStudio',
+                        subtitle: 'Best Practices for Analysis and Dissemination',
+                useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                      },
+
+      // Author information
+      presenters: [
+            {
+        name:  '<a href="https://melindahiggins.netlify.com/">Melinda K. Higgins, PhD.</a>' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
+
+  <style>
+  div.footnotes {
+    position: absolute;
+    bottom: 0;
+    margin-bottom: 10px;
+    width: 80%;
+    font-size: 0.5em;
+  }
+  </style>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script>
+  $(document).ready(function() {
+    $('slide:not(.backdrop):not(.title-slide)').append('<div class=\"footnotes\">');
+
+    $('footnote').each(function(index) {
+      var text  = $(this).html();
+      var fnNum = (index+1).toString();
+      $(this).html(fnNum.sup());
+
+      var footnote   = fnNum + '. ' + text + '<br/>';
+      var oldContent = $(this).parents('slide').children('div.footnotes').html();
+      var newContent = oldContent + footnote;
+      $(this).parents('slide').children('div.footnotes').html(newContent);
+    });
+  });
+  </script>
+  <script src="module_01_files/header-attrs-2.14/header-attrs.js"></script>
+  <link href="module_01_files/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
+  <link href="module_01_files/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
+  <link href="module_01_files/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
+  <script src="module_01_files/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+  <script src="module_01_files/ioslides-13.5.1/js/prettify/prettify.js"></script>
+  <script src="module_01_files/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+  <script src="module_01_files/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+  <script src="module_01_files/ioslides-13.5.1/js/hammer.js"></script>
+  <script src="module_01_files/ioslides-13.5.1/js/slide-controller.js"></script>
+  <script src="module_01_files/ioslides-13.5.1/js/slide-deck.js"></script>
+
+  <style type="text/css">
+
+    b, strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    summary {
+      display: list-item;
+    }
+
+    details > summary > p:only-child {
+      display: inline;
+    }
+
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
+
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+/* https://github.com/ropensci/plotly/pull/524#issuecomment-468142578 */
+slide:not(.current) .plotly.html-widget{
+  display: block;
+}
+
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            
+  </style>
+
+  <link rel="stylesheet" href="ioslides.css" type="text/css" />
+
+</head>
+
+<body style="opacity: 0">
+
+<slides class="layout-widescreen">
+
+  <slide class="title-slide segue nobackground">
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      <h2 data-config-subtitle><!-- populated from slide_config.json --></h2>
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+            <p style="margin-top: 6px; margin-left: -2px;">March 21, 2018: 12:30pm – 3:30pm, EST<br><br><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="by-nc-sa-4.0-88x31.png" style="border-width:0" src="images/by-nc-sa-4.0-88x31.png" /></a></p>
+          </hgroup>
+  </slide>
+
+<slide class=""><hgroup><h2>Workshop Outline</h2></hgroup><article  id="workshop-outline">
+
+<ul class = 'build'>
+<li>Module 01: Reproducibile Research</li>
+<li>Module 02: Workshop materials, RStudio Interface, Getting Started with R</li>
+<li>Module 03: Understanding R, Working with objects, R Scripts, R Packages</li>
+<li>— BREAK 10 minutes —</li>
+<li>Module 04: Creating Documents with R Markdown</li>
+<li>Module 05: Create Document = R Script + R Markdown</li>
+<li>Module 06: Customizing R Markdown (templates, parameters and automation)</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Module 01</h2></hgroup><article  id="module-01" class="flexbox vcenter">
+
+<div class="centered">
+<p style="font-size:48px">
+
+<b>Reproducible Research</b>
+
+</p></div>
+
+</article></slide><slide class=""><hgroup><h2>Timeline Reproducible Research &amp; Transparency<footnote>Timeline partially based on PLOS Blog December 2016<a href='http://blogs.plos.org/absolutely-maybe/2016/12/05/reproducibility-crisis-timeline-milestones-in-tackling-research-reliability/' title=''>http://blogs.plos.org/absolutely-maybe/2016/12/05/reproducibility-crisis-timeline-milestones-in-tackling-research-reliability/</a></footnote></h2></hgroup><article  id="timeline-reproducible-research-transparencytimeline-partially-based-on-plos-blog-december-2016httpblogs.plos.orgabsolutely-maybe20161205reproducibility-crisis-timeline-milestones-in-tackling-research-reliability">
+
+<table class = 'rmdtable'>
+<col width="11.363636%" />
+<col width="88.636364%" />
+<tr class="header">
+<th align="left">YEAR</th>
+<th align="left">Event</th>
+</tr>
+<tr class="odd">
+<td align="left">1992</td>
+<td align="left">Jon Claerbout coined the term &ldquo;reproducible research&rdquo; in his book &ldquo;EARTH SOUNDINGS ANALYSIS: Processing versus Inversion (PVI)&rdquo; <footnote><a href='http://sepwww.stanford.edu/sep/jon/reproducible.html' title=''>http://sepwww.stanford.edu/sep/jon/reproducible.html</a></footnote></td>
+</tr>
+<tr class="even">
+<td align="left">1996</td>
+<td align="left">CONSORT statement introduced standards for reporting clinical trials <footnote>Begg C, Cho M, Eastwood S, Horton R, Moher D, Olkin I, Pitkin R, Rennie D, Schulz KF, Simel D, Stroup DF (1996). Improving the quality of reporting of randomized controlled trials. The CONSORT statement. JAMA 276:637-639.</footnote></td>
+</tr>
+<tr class="odd">
+<td align="left">2004</td>
+<td align="left">International Committee of Medical Journal Editors (ICMJE) stated they would not publish a clinical trial that had not been registered. <footnote><a href='http://www.icmje.org/news-and-editorials/update_2005.html' title=''>http://www.icmje.org/news-and-editorials/update_2005.html</a></footnote></td>
+</tr>
+<tr class="even">
+<td align="left">2005</td>
+<td align="left">Ioannidis, J. P. A. Why most published research findings are false. PLoS Med. 2, e124 (2005) <footnote><a href='https://doi.org/10.1371/journal.pmed.0020124' title=''>https://doi.org/10.1371/journal.pmed.0020124</a></footnote></td>
+</tr>
+</table>
+
+</article></slide><slide class=""><hgroup><h2>Timeline Reproducible Research &amp; Transparency</h2></hgroup><article  id="timeline-reproducible-research-transparency">
+
+<table class = 'rmdtable'>
+<col width="11.363636%" />
+<col width="88.636364%" />
+<tr class="header">
+<th align="left">YEAR</th>
+<th align="left">Event</th>
+</tr>
+<tr class="odd">
+<td align="left">2007</td>
+<td align="left">FDA Amendments Act (FDAAA) required more types of clinical trials to be registered (final rules took effect January 2017) <footnote><a href='https://clinicaltrials.gov/ct2/manage-recs/fdaaa' title=''>https://clinicaltrials.gov/ct2/manage-recs/fdaaa</a></footnote></td>
+</tr>
+<tr class="even">
+<td align="left">2009</td>
+<td align="left">Journal of Biostatistics institutes policy to work with authors to publish articles that meet a standard of reproducibility.<footnote><a href='https://academic.oup.com/biostatistics/article/10/3/405/293660/Reproducible-research-and-Biostatistics' title=''>https://academic.oup.com/biostatistics/article/10/3/405/293660/Reproducible-research-and-Biostatistics</a> &amp; <a href='https://academic.oup.com/biostatistics/pages/General_Instructions' title=''>https://academic.oup.com/biostatistics/pages/General_Instructions</a></footnote></td>
+</tr>
+<tr class="odd">
+<td align="left">2011</td>
+<td align="left">Alsheikh-Ali, et.al. (2011), report the low percentage of researchers satisfying the policies regarding the availability and sharing of their data.<footnote>Alsheikh-Ali, A. A., Qureshi, W., Al-Mallah, M. H. &amp; Ioannidis, J. P. Public availability of published research data in high-impact journals. PloS ONE 6, e24357, 2011; <a href='https://doi.org/10.1371/journal.pone.0024357' title=''>https://doi.org/10.1371/journal.pone.0024357</a></footnote></td>
+</tr>
+</table>
+
+</article></slide><slide class=""><hgroup><h2>Cancer Testing Falls Apart</h2></hgroup><article  id="cancer-testing-falls-apart">
+
+<div class="columns-2">
+<p><img src="images/baggerly.PNG" alt="baggerly" style="width:370px;height:403px;"></p>
+
+<ul class = 'build'>
+<li>Duke - Alignment of Cancer Treatments by Gene Type</li>
+<li>MD Anderson wanted to reproduce Duke’s work</li>
+<li>Mistakes found - spreadsheet alignment errors</li>
+<li>Trials shut down, 4 papers retracted, lead investigators resigned</li>
+<li>Patients pursuing legal action</li>
+</ul></div>
+
+<p><a href='http://www.nytimes.com/2011/07/08/health/research/08genes.html' title=''>http://www.nytimes.com/2011/07/08/health/research/08genes.html</a></p>
+
+<p>2010 Video Presentation by Keith A. Baggerly <a href='http://videolectures.net/cancerbioinformatics2010_baggerly_irrh/' title=''>http://videolectures.net/cancerbioinformatics2010_baggerly_irrh/</a></p>
+
+</article></slide><slide class=""><hgroup><h2>The Excel-Error Heard Around the World</h2></hgroup><article  id="the-excel-error-heard-around-the-world" class="columns-2">
+
+<p><img src="images/rogoff.PNG" alt="rogoff" style="width:370px;height:290px;"></p>
+
+<p><a href='https://newrepublic.com/article/112951/rogoff-reinhart-and-world-excel-error-research' title=''>https://newrepublic.com/article/112951/rogoff-reinhart-and-world-excel-error-research</a></p>
+
+<ul class = 'build'>
+<li>Kenneth Rogoff and Carmen Reinhart (Harvard): &ldquo;Growth in a Time of Debt&rdquo;</li>
+<li>Claimed countries with debt &gt; 90% of GDP experience slower growth</li>
+<li>Thomas Herndon (28y econ grad student) at Univ of Massachusetts Amherst tried to reproduce these results</li>
+<li>Found major formula error - original paper excluded key data from Canada, New Zealand, and Australia.</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Timeline Reproducible Research &amp; Transparency</h2></hgroup><article  id="timeline-reproducible-research-transparency-1">
+
+<table class = 'rmdtable'>
+<col width="11.363636%" />
+<col width="88.636364%" />
+<tr class="header">
+<th align="left">YEAR</th>
+<th align="left">Event</th>
+</tr>
+<tr class="odd">
+<td align="left">2012</td>
+<td align="left">Begley and Ellis reviewed 53 &ldquo;landmark&rdquo; studies and only 6 (11%) had the scientific findings confirmed.<footnote><a href='http://www.nature.com/nature/journal/v483/n7391/full/483531a.html' title=''>http://www.nature.com/nature/journal/v483/n7391/full/483531a.html</a></footnote></td>
+</tr>
+<tr class="even">
+<td align="left">2013</td>
+<td align="left">Center for Open Science launches &amp; by 2014 the Open Science Framework has 7000 users with more than 45,000+ and over 15 institutions by 2017<footnote><a href='https://cos.io/about/brief-history-cos-2013-2017/' title=''>https://cos.io/about/brief-history-cos-2013-2017/</a> &amp; <a href='https://osf.io/' title=''>https://osf.io/</a></footnote></td>
+</tr>
+<tr class="odd">
+<td align="left">2014</td>
+<td align="left">NIH publishes their guidelines for addressing reproducibility<footnote><a href='https://www.nih.gov/research-training/rigor-reproducibility' title=''>https://www.nih.gov/research-training/rigor-reproducibility</a></footnote></td>
+</tr>
+<tr class="even">
+<td align="left">2015</td>
+<td align="left">The Open Science Collaboration reports that they were only able to replicate between 1/3 to 1/2 of the results from 100 studies<footnote>Science, 28 Aug 2015: Vol. 349, Issue 6251, aac4716; DOI: 10.1126/science.aac4716; <a href='http://science.sciencemag.org/content/349/6251/aac4716' title=''>http://science.sciencemag.org/content/349/6251/aac4716</a></footnote></td>
+</tr>
+</table>
+
+</article></slide><slide class=""><hgroup><h2>Wide-Spread Gene Name Errors</h2></hgroup><article  id="wide-spread-gene-name-errors" class="centered">
+
+<p><img src="images/geneerrors.PNG" alt="geneerrors" style="width:643px;height:449px;"></p>
+
+<p><a href='https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1044-7' title=''>https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1044-7</a></p>
+
+</article></slide><slide class=""><hgroup><h2>Wide-Spread Gene Name Errors</h2></hgroup><article  id="wide-spread-gene-name-errors-1">
+
+<ul class = 'build'>
+<li>MS Excel inadvertently converts gene symbols to dates and floating-point numbers</li>
+<li>For example, gene symbols such as SEPT2 (Septin 2) and MARCH1 [Membrane-Associated Ring Finger (C3HC4) 1, E3 Ubiquitin Protein Ligase] are converted by default to &lsquo;2-Sep&rsquo; and &lsquo;1-Mar&rsquo;, respectively.</li>
+<li>RIKEN identifiers were automatically converted to floating point numbers (i.e. from accession &lsquo;2310009E13&rsquo; to &lsquo;2.31E+13&rsquo;).</li>
+<li>And gene symbols were converted to dates in supplementary data of recently published papers (e.g. &lsquo;SEPT2&rsquo; converted to &lsquo;2006/09/02&rsquo;).</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Wide-Spread Gene Name Errors</h2></hgroup><article  id="wide-spread-gene-name-errors-2" class="centered">
+
+<p><img src="images/economist.PNG" alt="economist" style="width:398px;height:416px;"></p>
+
+<p><a href='https://www.economist.com/blogs/graphicdetail/2016/09/daily-chart-3' title=''>https://www.economist.com/blogs/graphicdetail/2016/09/daily-chart-3</a></p>
+
+</article></slide><slide class=""><hgroup><h2>People to Know and Books on Reproducibility</h2></hgroup><article  id="myImagePage">
+
+<table class = 'rmdtable'>
+<col width="26.415094%" />
+<col width="73.584906%" />
+<tr class="header">
+<th align="center">Image</th>
+<th align="left">Book</th>
+</tr>
+<tr class="odd">
+<td align="center"><img src='images/book_implementRepRes.PNG' title=''/></td>
+<td align="left">Implementing Reproducible Research by <span style="color:red">
+Victoria Stodden, Friedrich Leisch, Roger D. Peng</span> <a href='https://www.crcpress.com/Implementing-Reproducible-Research/Stodden-Leisch-Peng/p/book/9781466561595' title=''>https://www.crcpress.com/Implementing-Reproducible-Research/Stodden-Leisch-Peng/p/book/9781466561595</a></td>
+</tr>
+<tr class="even">
+<td align="center"><img src='images/book_XieKnitr.PNG' title=''/></td>
+<td align="left">Dynamic Documents with R and knitr (Chapman &amp; Hall/CRC The R Series) 1st Edition by <span style="color:red">
+Yihui Xie</span> <a href='https://www.crcpress.com/Dynamic-Documents-with-R-and-knitr/Xie/p/book/9781482203530' title=''>https://www.crcpress.com/Dynamic-Documents-with-R-and-knitr/Xie/p/book/9781482203530</a></td>
+</tr>
+<tr class="odd">
+<td align="center"><img src='images/book_bookdown.PNG' title=''/></td>
+<td align="left">bookdown: Authoring Books and Technical Documents with R Markdown by <span style="color:red">
+Yihui Xie</span> <a href='https://www.crcpress.com/bookdown-Authoring-Books-and-Technical-Documents-with-R-Markdown/Xie/p/book/9781138700109' title=''>https://www.crcpress.com/bookdown-Authoring-Books-and-Technical-Documents-with-R-Markdown/Xie/p/book/9781138700109</a> &amp; read online <a href='https://bookdown.org/yihui/bookdown/' title=''>https://bookdown.org/yihui/bookdown/</a></td>
+</tr>
+</table>
+
+</article></slide><slide class=""><hgroup><h2>People to Know and Books on Reproducibility</h2></hgroup><article  id="myImagePage">
+
+<table class = 'rmdtable'>
+<col width="26.415094%" />
+<col width="73.584906%" />
+<tr class="header">
+<th align="center">Image</th>
+<th align="left">Book</th>
+</tr>
+<tr class="odd">
+<td align="center"><img src='images/jennyBryan.PNG' title=''/></td>
+<td align="left">Happy Git and GitHub for the useR by <span style="color:red">
+Jenny Bryan</span>; read online <a href='http://happygitwithr.com/' title=''>http://happygitwithr.com/</a></td>
+</tr>
+<tr class="even">
+<td align="center"><img src='images/book_HortonKleinman.PNG' title=''/></td>
+<td align="left">Using R and RStudio for Data Management, Statistical Analysis, and Graphics, Second Edition by <span style="color:red">
+Nicholas J. Horton &amp; Ken Kleinman</span> <a href='https://www.crcpress.com/Using-R-and-RStudio-for-Data-Management-Statistical-Analysis-and-Graphics/Horton-Kleinman/p/book/9781482237368' title=''>https://www.crcpress.com/Using-R-and-RStudio-for-Data-Management-Statistical-Analysis-and-Graphics/Horton-Kleinman/p/book/9781482237368</a>; also see <a href='http://mosaic-web.org/' title=''>Project MOSAIC, http://mosaic-web.org/</a></td>
+</tr>
+<tr class="odd">
+<td align="center"><img src='images/book_ModernDive.PNG' title=''/> &amp; <img src='images/book_GettingUsedR.PNG' title=''/></td>
+<td align="left">ModernDive: An Introduction to Statistical and Data Sciences via R by <span style="color:red">
+Chester Ismay and Albert Y. Kim</span>; read online <a href='https://ismayc.github.io/moderndiver-book/' title=''>https://ismayc.github.io/moderndiver-book/</a> &amp; Getting used to R, RStudio, and R Markdown by Chester Ismay <a href='https://ismayc.github.io/rbasics-book/' title=''>https://ismayc.github.io/rbasics-book/</a></td>
+</tr>
+<tr class="even">
+<td align="center">.</td>
+<td align="left">… and lots more … see <a href='https://bookdown.org/' title=''>https://bookdown.org/</a></td>
+</tr>
+</table>
+
+</article></slide><slide class=""><hgroup><h2>Literate Programming &gt; Dynamic Documentation &gt; [R]Markdown</h2></hgroup><article  id="literate-programming-dynamic-documentation-rmarkdown">
+
+<table class = 'rmdtable'>
+<col width="7.352941%" />
+<col width="92.647059%" />
+<tr class="header">
+<th align="left">YEAR</th>
+<th align="left">Event</th>
+</tr>
+<tr class="odd">
+<td align="left">1992</td>
+<td align="left">&ldquo;Literate Programming&rdquo; is introduced by <span style="color:red">
+Donald Knuth</span> as &ldquo;that (which) combines a programming language with a documentation language, thereby making programs more robust, more portable, more easily maintained, and arguably more fun to write than programs that are written only in a high-level language. <strong><span style="color:red">
+The main idea is to treat a program as a piece of literature, addressed to human beings rather than to a computer.</span></strong>&rdquo; <a href='http://www-cs-faculty.stanford.edu/~knuth/lp.html' title=''>http://www-cs-faculty.stanford.edu/~knuth/lp.html</a></td>
+</tr>
+<tr class="even">
+<td align="left">2002</td>
+<td align="left"><span style="color:red">
+Friedrich Leisch</span> introduces <code>SWEAVE</code> a program for &ldquo;Dynamic generation of statistical reports using literate data analysis&rdquo; <a href='https://leisch.userweb.mwn.de/Sweave/' title=''>https://leisch.userweb.mwn.de/Sweave/</a></td>
+</tr>
+</table>
+
+</article></slide><slide class=""><hgroup><h2>Literate Programming &gt; Dynamic Documentation &gt; [R]Markdown</h2></hgroup><article  id="literate-programming-dynamic-documentation-rmarkdown-1">
+
+<table class = 'rmdtable'>
+<col width="7.352941%" />
+<col width="92.647059%" />
+<tr class="header">
+<th align="left">YEAR</th>
+<th align="left">Event</th>
+</tr>
+<tr class="odd">
+<td align="left">2004</td>
+<td align="left"><span style="color:red">
+John Gruber</span> created the <code>Markdown</code> language in 2004 in collaboration with Aaron Swartz - their goal was to &ldquo;write using an easy-to-read, easy-to-write plain text format, and optionally convert it to structurally valid XHTML (or HTML)&rdquo; <a href='https://daringfireball.net/projects/markdown/' title=''>https://daringfireball.net/projects/markdown/</a></td>
+</tr>
+<tr class="even">
+<td align="left">2012</td>
+<td align="left">Yihui Xie releases <code>knitr</code> R package released - <code>knitr</code> was inspired by <code>SWEAVE</code></td>
+</tr>
+<tr class="odd">
+<td align="left">2014</td>
+<td align="left"><code>rmarkdown</code> R package released - extends <code>Markdown</code> to work with R/RStudio environment</td>
+</tr>
+</table>
+
+</article></slide><slide class=""><hgroup><h2><code>SWEAVE</code> by Friedrich Leisch</h2></hgroup><article  id="sweave-by-friedrich-leisch">
+
+<p><img src="images/sweave.PNG" alt="Sweave" style="width:598px;height:68px;"></p>
+
+<div class="quote-container2">
+<blockquote>
+<p>What is Sweave?</p>
+</blockquote>
+
+<blockquote>
+<p><em>&ldquo;Sweave is a tool that allows to embed the R code for complete data analyses in latex documents. The purpose is to create dynamic reports, which can be updated automatically if data or analysis change. Instead of inserting a prefabricated graph or table into the report, the master document contains the R code necessary to obtain it. When run through R, all data analysis output (tables, graphs, etc.) is <strong><span style="color:red">
+created on the fly and inserted</span></strong> into a final latex document. The report can be <strong><span style="color:red">
+automatically updated if data or analysis change, which allows for truly reproducible research</span></strong>.&rdquo;</em><footnote>Friedrich Leisch. Sweave: Dynamic generation of statistical reports using literate data analysis. In Wolfgang Härdle and Bernd Rönz, editors, Compstat 2002 - Proceedings in Computational Statistics, pages 575-580. Physica Verlag, Heidelberg, 2002. ISBN 3-7908-1517-9.</footnote></p>
+</blockquote></div>
+
+</article></slide><slide class=""><hgroup><h2>The next evolution <code>&lt;- knitr</code></h2></hgroup><article  id="the-next-evolution---knitr">
+
+<div class="columns-2">
+<div class="centered">
+<img src='images/knitr.png' title=''/></div>
+
+<p>In 2012 Yihui Xie, created and released the <code>knitr</code> package for R to extend the capabilities of <code>SWEAVE</code> beyond LaTeX.</p></div>
+
+<div class="quote-container2">
+<blockquote>
+<p><em>&ldquo;The <strong>knitr</strong> package was designed to be a transparent engine for dynamic report generation with R, solve some long-standing problems in Sweave, and combine features in other add-on packages into one package.&rdquo;</em><footnote><a href='https://yihui.name/knitr/' title=''>https://yihui.name/knitr/</a></footnote></p>
+</blockquote></div>
+
+</article></slide><slide class=""><hgroup><h2>The next evolution <code>&lt;- ... + rmarkdown</code></h2></hgroup><article  id="the-next-evolution---...-rmarkdown">
+
+<div class="centered">
+<img src='images/rmarkdown.png' title=''/></div>
+
+<ul class = 'build'>
+<li><p>In 2014, RStudio released <code>rmarkdown</code> to extend the <code>markdown</code> language originally intended to write documents for the &ldquo;web&rdquo; <em>(i.e. HTML)</em>.<footnote><a href='https://daringfireball.net/projects/markdown/syntax' title=''>https://daringfireball.net/projects/markdown/syntax</a></footnote></p></li>
+<li><p><code>rmarkdown</code> leverages <span style="color:red">
+Pandoc</span> <em>(&ldquo;universal document converter&rdquo;)</em> <footnote><a href='http://pandoc.org/index.html' title=''>http://pandoc.org/index.html</a></footnote> to convert between formats: from HTML (readable by web browsers) to DOC (such as from Microsoft Word or Google Docs) to ODT (Libre Office) to PDF (portable document format) to others like EPUB (e-books), HTML5 slide shows (slidy, ioslides), and TeX based documents and slides (Beamer).</p></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Pandoc <a href='https://pandoc.org/' title=''>https://pandoc.org/</a></h2></hgroup><article  id="pandoc-httpspandoc.org">
+
+<p><span style="font-size: 20px;">
+…often called the <em>Swiss-Army knife</em> for converting files from one format to another. Pandoc can convert documents in markdown, reStructuredText, textile, HTML, DocBook, LaTeX, MediaWiki markup, TWiki markup, OPML, Emacs Org-Mode, Txt2Tags, Microsoft Word docx, LibreOffice ODT, EPUB, or Haddock markup to</span></p>
+
+<span style="font-size: 20px;">
+
+<div class="columns-1">
+<ul class = 'build'>
+<li>HTML formats: XHTML, HTML5,Slidy, reveal.js, Slideous, S5, DZSlides.</li>
+<li>Word processor formats: Microsoft Word docx, OpenOffice/LibreOffice ODT, OpenDocument XML</li>
+<li>Ebooks: EPUB version 2 or 3, FictionBook2</li>
+<li>Documentation formats: DocBook, TEI Simple, GNU TexInfo, Groff man pages, Haddock markup</li>
+<li>Page layout formats: InDesign ICML</li>
+<li>Outline formats: OPML</li>
+<li>TeX formats: LaTeX, ConTeXt, LaTeX Beamer slides</li>
+<li>PDF via LaTeX</li>
+<li>Lightweight markup formats: Markdown (including CommonMark), reStructuredText, AsciiDoc, MediaWiki markup, DokuWiki markup, Emacs Org-Mode, Textile</li>
+<li>Custom formats: written in lua.</li>
+</ul></div>
+
+<p></span></p>
+
+</article></slide><slide class=""><hgroup><h2>The <strong>RStudio</strong>”HUB”</h2></hgroup><article  id="the-rstudiohub">
+
+<p><img src="images/rmarkdownHome.PNG" width="850" /></p>
+
+</article></slide><slide class=""><hgroup><h2>Reproducible Principles - Process &amp; Structure</h2></hgroup><article  id="reproducible-principles---process-structure">
+
+<ul class = 'build'>
+<li>Organization</li>
+<li>Clear Documentation</li>
+<li>Standardized</li>
+<li>Centralized</li>
+<li>Efficiency</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Think about your own work…</h2></hgroup><article  id="think-about-your-own-work">
+
+<ul class = 'build'>
+<li>What do you want to automate?</li>
+<li>What could you re-use?
+
+<ul class = 'build'>
+<li>code, files, formatting, graphics, logos, header, footer, boilerplate</li>
+</ul></li>
+<li>What should you share with your team?</li>
+<li>What do you find yourself doing over and over?
+
+<ul class = 'build'>
+<li>correcting or reformatting</li>
+</ul></li>
+<li>If you won the lottery today (and left your job), what do you need to tell your replacement so they can pick up where you left off and complete your current tasks?</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Journalism - 538.com</h2></hgroup><article  id="journalism---538.com">
+
+<p>538.com <a href='http://fivethirtyeight.com/' title=''>http://fivethirtyeight.com/</a> hosts stories and opinion pieces covering poll analyses, politics, economics, health, popular culture, and sports. The founder, Nate Silver, and the 538 team are best known for their political polling and forecasting during the United States Presidential and related elections since 2008. ESPN now owns 538.com (as of 2013) retaining Nate Silver as the Editor-in-Chief.</p>
+
+<p>Most of their articles provide references and links to the original data sources plus details on how their figures, analyses and statistical models were developed. They also host the data, code and details behind their analyses on Github <a href='https://github.com/fivethirtyeight/' title=''>https://github.com/fivethirtyeight/</a>.</p>
+
+<p>We will work with some of these datasets in our exercises later in this course and work with the <code>fivethirtyeight</code> R package <a href='https://cran.r-project.org/web/packages/fivethirtyeight/' title=''>https://cran.r-project.org/web/packages/fivethirtyeight/</a>.</p>
+
+</article></slide><slide class=""><hgroup><h2>Telling Stories with Data</h2></hgroup><article  id="telling-stories-with-data">
+
+<p>Andrew Flowers (economist, data scientist, journalist and former writer for fivethirtyeight.com) presented &ldquo;Finding and Telling Stories with R&rdquo; at the 2017 RStudio Conference (Orlando, FL).</p>
+
+<p>The webinar recording of his presentation is available online <a href='https://www.rstudio.com/resources/videos/finding-and-telling-stories-with-r/' title=''>https://www.rstudio.com/resources/videos/finding-and-telling-stories-with-r/</a>.</p>
+
+<p>In his presentation, he highlights the various aspects of &ldquo;data journalism&rdquo; and importance of workflow, data processing and transparency in analysis and communication - all key aspects of reproducibility. Andrew Flowers is also a contributor to the <code>fivethirtyeight</code> R package.</p>
+
+</article></slide><slide class=""><hgroup><h2><strong>Transparency</strong> - Journal of Biostatsatistics</h2></hgroup><article  id="transparency---journal-of-biostatsatistics">
+
+<p>&ldquo;Our reproducible research policy is for papers in the journal to be kite-marked <strong>D</strong> if the data on which they are based are freely available, <strong>C</strong> if the authors’ code is freely available, and <strong>R</strong> if both data and code are available, and our Associate Editor for Reproducibility is able to use these to reproduce the results in the paper. Data and code are published electronically on the journal’s website as Supplementary Materials.&rdquo;</p>
+
+<p><a href='https://academic.oup.com/biostatistics/pages/General_Instructions' title=''>https://academic.oup.com/biostatistics/pages/General_Instructions</a></p>
+
+<p>Example of an article marked <strong>R</strong>:</p>
+
+<ul class = 'build'>
+<li>Air pollution and health in Scotland: a multicity study; by Duncan Lee; Claire Ferguson ; and Richard Mitchell; Biostatistics, Volume 10, Issue 3, 1 July 2009, Pages 409–423, <a href='https://doi.org/10.1093/biostatistics/kxp010' title=''>https://doi.org/10.1093/biostatistics/kxp010</a></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Speed - 2001 outbreak of <em>E.Coli 0104:H4</em></h2></hgroup><article  id="speed---2001-outbreak-of-e.coli-0104h4">
+
+<p>In 2001 there was an outbreak of <em>E.Coli 0104:H4</em> that killed 50 people in Europe <a href='http://dx.doi.org/10.5524/100001' title=''>http://dx.doi.org/10.5524/100001</a>.</p>
+
+<p>Researchers at BGI <em>(formally the Beijing Genomics Institute)</em> worked in collaboration with the Medical Center in Hamburg-Eppendorf to rapidly sequence the genome of the pathogen. Given the severity of the outbreak, the team announced and released the genome via Twitter to the world-wide community of microbial genomicists.</p>
+
+<p>A Github repository was established <a href='https://github.com/ehec-outbreak-crowdsourced/BGI-data-analysis/wiki' title=''>https://github.com/ehec-outbreak-crowdsourced/BGI-data-analysis/wiki</a> to &ldquo;crowdsource&rdquo; analysis and research to find a treatment.</p>
+
+<p>People started contributing their work in under <strong>24 HOURS</strong> and within <strong>5 DAYS!!</strong> a bacterial agent was proposed to kill the pathogen. <em><strong>This case, highlights the importance of these methods and work practices not only for speed and efficiency but also in rapidly addressing problems and developing solutions that can save lives.</strong></em></p>
+
+</article></slide><slide class=""><hgroup><h2>Documentation</h2></hgroup><article  id="documentation">
+
+<ul class = 'build'>
+<li>main component is text</li>
+<li>well written</li>
+<li>good organization and flow</li>
+<li>easily accessible</li>
+<li>understood by team members at all levels</li>
+<li><strong><span style="color:red">
+data + code + text + figures</span></strong> all combined together <em>[e.g. literate programming]</em></li>
+<li>at end, formatting styles applied via &ldquo;markup/markdown&rdquo;</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Organization</h2></hgroup><article  id="organization">
+
+<ul class = 'build'>
+<li>projects grow</li>
+<li>supporting documentation and files - numerous</li>
+<li>relationships change and can grow more complex</li>
+<li>need file organization and naming schemes</li>
+<li>file names should be:
+
+<ul class = 'build'>
+<li>readable by the computer, easy to search, easy to sort (especially by date and author if needed)</li>
+<li>human readable with logical naming schemes and contain enough info so human knows what is in the file/what the file is for</li>
+<li>and short enough to be reasonably manageable</li>
+</ul></li>
+<li>consider user-based access and security (partitioned by &ldquo;need to know&rdquo; <em>[users with editing and write permissions versus users with read-only access]</em></li>
+</ul>
+
+<p>Research Compendium Example <a href='https://github.com/ropensci/rrrpkg' title=''>https://github.com/ropensci/rrrpkg</a></p>
+
+</article></slide><slide class=""><hgroup><h2>Dissemination - Why?</h2></hgroup><article  id="dissemination---why">
+
+<ul class = 'build'>
+<li>store and share your data and code – even if it is only for your future reference</li>
+<li>sometimes expectation/requirement of funding agency, publisher</li>
+<li><strong><span style="color:red">
+increased visibility, you as source - default subject matter expert</span></strong></li>
+<li><strong><span style="color:red">
+speed of collaboration</span></strong> - faster advancement of science, knowledge</li>
+<li>good will with community/public</li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Dissemination - How?</h2></hgroup><article  id="dissemination---how">
+
+<ul class = 'build'>
+<li>Cloud-based &ldquo;File Storage&rdquo;
+
+<ul class = 'build'>
+<li>Dropbox <a href='https://www.dropbox.com/' title=''>https://www.dropbox.com/</a></li>
+<li>Google drive <a href='https://www.google.com/drive/' title=''>https://www.google.com/drive/</a></li>
+<li>Github (better with version control and tracking) <a href='https://github.com/' title=''>https://github.com/</a></li>
+</ul></li>
+<li>Data repositories
+
+<ul class = 'build'>
+<li>GenBank <a href='https://www.ncbi.nlm.nih.gov/genbank/' title=''>https://www.ncbi.nlm.nih.gov/genbank/</a></li>
+<li>PDB <a href='https://www.rcsb.org/pdb/home/home.do' title=''>https://www.rcsb.org/pdb/home/home.do</a></li>
+</ul></li>
+<li>In addition to Github
+
+<ul class = 'build'>
+<li>Bitbucket <a href='https://bitbucket.org/' title=''>https://bitbucket.org/</a></li>
+<li>Dryad <a href='http://datadryad.org/' title=''>http://datadryad.org/</a></li>
+<li>Figshare <a href='https://figshare.com/' title=''>https://figshare.com/</a></li>
+<li>Zenodo <a href='https://zenodo.org/' title=''>https://zenodo.org/</a></li>
+</ul></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>Dissemination - Who? <em>(e.g. stakeholders)</em></h2></hgroup><article  id="dissemination---who-e.g.-stakeholders">
+
+<ul class = 'build'>
+<li><strong><span style="color:red">
+Yourself</span></strong></li>
+<li>Your organization - internal reports</li>
+<li>Journals - articles, manuscripts</li>
+<li>Books</li>
+<li>Blogs/Websites</li>
+<li>RSS feeds</li>
+<li>Rpubs <a href='https://rpubs.com/' title=''>https://rpubs.com/</a></li>
+<li>Gitbook <a href='https://www.gitbook.com/' title=''>https://www.gitbook.com/</a></li>
+<li>Bookdown <a href='https://bookdown.org/yihui/bookdown/' title=''>https://bookdown.org/yihui/bookdown/</a></li>
+</ul>
+
+</article></slide><slide class=""><hgroup><h2>The Big Picture</h2></hgroup><article  id="bigpic">
+
+<img src='images/TheBigPic01a.png' title=''/>
+
+</article></slide><slide class=""><hgroup><h2>The Big Picture</h2></hgroup><article  id="bigpic">
+
+<img src='images/TheBigPic02a.png' title=''/>
+
+</article></slide><slide class=""><hgroup><h2>The Big Picture</h2></hgroup><article  id="bigpic">
+
+<img src='images/TheBigPic03a.png' title=''/>
+
+</article></slide><slide class=""><hgroup><h2>The Big Picture</h2></hgroup><article  id="bigpic">
+
+<img src='images/TheBigPic04a.png' title=''/>
+
+</article></slide><slide class=""><hgroup><h2>The Big Picture</h2></hgroup><article  id="bigpic">
+
+<img src='images/TheBigPic05a.png' title=''/></article></slide>
+
+
+  <slide class="backdrop"></slide>
+
+</slides>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
+  })();
+</script>
+
+</body>
+</html>
