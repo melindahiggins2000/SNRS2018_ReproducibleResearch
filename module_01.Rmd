@@ -103,7 +103,7 @@ YEAR | Event
 
 ## Wide-Spread Gene Name Errors {.centered}
 
-<img src="images/economist.PNG" alt="economist" style="width:398px;height:416px;">
+<img src="images/economist2.png" alt="economist" style="width:398px;height:416px;">
 
 [https://www.economist.com/blogs/graphicdetail/2016/09/daily-chart-3](https://www.economist.com/blogs/graphicdetail/2016/09/daily-chart-3)
 
